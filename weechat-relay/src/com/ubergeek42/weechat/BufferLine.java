@@ -119,7 +119,12 @@ public class BufferLine {
 			this.timeStr = DATEFORMAT.format(time);
 		return this.timeStr;
 	}
-	
+	/**
+	* Get the timestamp associated with the line as a Java Date object
+	*/
+	public Date getTimestamp() {
+		return this.time;
+	}
 	/**
 	 * Set whether this line should be visible or not
 	 * @param displayed - Whether to show the line or not

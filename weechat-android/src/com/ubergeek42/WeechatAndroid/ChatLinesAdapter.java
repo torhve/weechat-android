@@ -16,6 +16,8 @@
 package com.ubergeek42.WeechatAndroid;
 
 import java.util.LinkedList;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -36,15 +38,17 @@ import android.widget.TextView;
 
 import com.ubergeek42.weechat.Buffer;
 import com.ubergeek42.weechat.BufferLine;
+import com.ubergeek42.WeechatAndroid.R;
 
 public class ChatLinesAdapter extends BaseAdapter implements ListAdapter, OnSharedPreferenceChangeListener {
 
 	private WeechatChatviewActivity activity = null;
 	private Buffer buffer;
 	private LinkedList<BufferLine> lines;
+	private final DateFormat timestampFormat;
+
 	private LayoutInflater inflater;
 	private SharedPreferences prefs;
-	
 	private boolean enableTimestamp = true;
 	private boolean enableColor = true;
 	private boolean enableFilters = true;
@@ -70,6 +74,7 @@ public class ChatLinesAdapter extends BaseAdapter implements ListAdapter, OnShar
 		enableFilters = prefs.getBoolean("chatview_filters", true);
 		prefix_align = prefs.getString("prefix_align", "right");
 		textSize = Float.parseFloat(prefs.getString("text_size", "10"));
+		timestampFormat = new SimpleDateFormat(prefs.getString("timestamp_format", "HH:mm:ss"));
 	}
 
 	@Override
@@ -96,6 +101,7 @@ public class ChatLinesAdapter extends BaseAdapter implements ListAdapter, OnShar
             convertView = inflater.inflate(R.layout.chatview_line, null);
             holder = new ViewHolder();
             holder.timestamp = (TextView) convertView.findViewById(R.id.chatline_timestamp);
+            
             holder.prefix = (TextView) convertView.findViewById(R.id.chatline_prefix);
             holder.message = (TextView) convertView.findViewById(R.id.chatline_message);
 
@@ -114,7 +120,7 @@ public class ChatLinesAdapter extends BaseAdapter implements ListAdapter, OnShar
 
         // Render the timestamp
         if (enableTimestamp) {
-            holder.timestamp.setText(chatLine.getTimestampStr());
+            holder.timestamp.setText(timestampFormat.format(chatLine.getTimestamp()));
             holder.timestamp.setPadding(holder.timestamp.getPaddingLeft(), holder.timestamp.getPaddingTop(), 5, holder.timestamp.getPaddingBottom());
         } else {
             holder.timestamp.setText("");

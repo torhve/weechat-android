@@ -15,11 +15,11 @@
  ******************************************************************************/
 package com.ubergeek42.WeechatAndroid;
 
-import android.preference.EditTextPreference;
-import android.preference.PreferenceActivity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
+import android.preference.PreferenceActivity;
 
 public class WeechatPreferencesActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
 
@@ -27,6 +27,7 @@ public class WeechatPreferencesActivity extends PreferenceActivity implements On
 	private EditTextPreference hostPref;
 	private EditTextPreference portPref;
 	private EditTextPreference textSizePref;
+    private EditTextPreference timestampformatPref;
 	private EditTextPreference passPref;
 	private EditTextPreference stunnelCert;
 	private EditTextPreference stunnelPass;
@@ -42,6 +43,8 @@ public class WeechatPreferencesActivity extends PreferenceActivity implements On
 	    portPref = (EditTextPreference) getPreferenceScreen().findPreference("port");
 	    passPref = (EditTextPreference) getPreferenceScreen().findPreference("password");
 	    textSizePref = (EditTextPreference) getPreferenceScreen().findPreference("text_size");
+        timestampformatPref = (EditTextPreference) getPreferenceScreen().findPreference("timestamp_format");
+
 	    stunnelCert = (EditTextPreference) getPreferenceScreen().findPreference("stunnel_cert");
 	    stunnelPass = (EditTextPreference) getPreferenceScreen().findPreference("stunnel_pass");
 	}
@@ -61,6 +64,7 @@ public class WeechatPreferencesActivity extends PreferenceActivity implements On
 	    hostPref.setSummary(sharedPreferences.getString("host", ""));
 	    portPref.setSummary(sharedPreferences.getString("port", "8001"));
 	    textSizePref.setSummary(sharedPreferences.getString("text_size", "10"));
+        timestampformatPref.setSummary(sharedPreferences.getString("timestampformatPref", "HH:mm:ss"));
 	    stunnelCert.setSummary(sharedPreferences.getString("stunnel_cert", "Not Set"));
 	    
 	    String tmp;
@@ -93,6 +97,8 @@ public class WeechatPreferencesActivity extends PreferenceActivity implements On
 		    }
 		} else if(key.equals("text_size")) {
 			textSizePref.setSummary(sharedPreferences.getString("text_size", "10"));
+        } else if(key.equals("timestamp_format")) {
+            timestampformatPref.setSummary(sharedPreferences.getString("timestamp_format", "HH:mm:ss"));
 		} else if(key.equals("stunnel_cert")) {
 			stunnelCert.setSummary(sharedPreferences.getString("stunnel_cert", "/sdcard/weechat/client.p12"));
 		} else if(key.equals("stunnel_pass")) {
