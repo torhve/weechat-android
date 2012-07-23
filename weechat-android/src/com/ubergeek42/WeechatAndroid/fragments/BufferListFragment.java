@@ -150,8 +150,8 @@ public class BufferListFragment extends SherlockListFragment implements RelayCon
 			// Create and update the buffer list when we connect to the service
 			m_adapter = new BufferListAdapter((WeechatActivity) getActivity());
 			bufferManager = rsb.getBufferManager();
+			m_adapter.buffers = bufferManager.getBuffers();
 			bufferManager.onChanged(BufferListFragment.this);
-
 
 			getActivity().runOnUiThread(new Runnable() {
 				@Override
