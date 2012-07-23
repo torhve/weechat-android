@@ -66,7 +66,21 @@ public class BufferManager implements RelayMessageHandler {
 	 */
 	@SuppressWarnings("unchecked")
 	public ArrayList<Buffer> getBuffers() {
-		return (ArrayList<Buffer>) buffers.clone();
+		ArrayList<Buffer> rBuffers = new ArrayList<Buffer>();
+		for (Buffer b : buffers) {
+			// Skip servers
+			// TODO: make this into a preference
+			RelayObject relayobj = b.getLocalVar("type");
+			if (relayobj != null) {
+				String server = relayobj.asString();
+				if (server.equals("server")) {
+					continue;
+				}
+				rBuffers.add(b);
+			}
+		}
+		return rBuffers;
+		// return (ArrayList<Buffer>) buffers.clone();
 	}
 	/**
 	 * Get the Buffer at the specified index
