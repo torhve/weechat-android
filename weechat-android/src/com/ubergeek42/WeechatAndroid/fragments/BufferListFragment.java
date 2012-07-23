@@ -151,6 +151,7 @@ public class BufferListFragment extends SherlockListFragment implements RelayCon
 			m_adapter = new BufferListAdapter((WeechatActivity) getActivity());
 			bufferManager = rsb.getBufferManager();
 			m_adapter.buffers = bufferManager.getBuffers();
+			
 			bufferManager.onChanged(BufferListFragment.this);
 
 			getActivity().runOnUiThread(new Runnable() {
@@ -160,7 +161,7 @@ public class BufferListFragment extends SherlockListFragment implements RelayCon
 				}
 			});
 			m_adapter.notifyDataSetChanged();
-
+			this.onBuffersChanged();
 		}
 	}
 

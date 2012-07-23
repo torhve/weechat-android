@@ -93,25 +93,30 @@ public class BufferListAdapter extends BaseAdapter{
 			holder.title.setText(com.ubergeek42.weechat.Color.stripAllColorsAndAttributes(bufferItem.getTitle()));
 		}
 
-        int unreadc = bufferItem.getUnread();
+        ;
         int highlightc = bufferItem.getHighlights();
+        int unreadc = bufferItem.getUnread();
         //holder.hotlist.setText(String.format("U:%2d  H:%2d   ", unread, highlight));
+
+    	holder.messagecount.setVisibility(View.GONE);
+    	holder.highlightcount.setVisibility(View.GONE);
+
 
         if (highlightc > 0) {
             holder.highlightcount.setText("" + highlightc);
-            holder.highlightcount.setTextColor(Color.MAGENTA);
+            //holder.highlightcount.setTextColor(Color.MAGENTA);
+			holder.highlightcount.setVisibility(View.VISIBLE);
         }
-        else {
-        	holder.highlightcount.setText("");
+        else {           
+        	if (unreadc > 0) {
+            	holder.messagecount.setText("" + unreadc);
+    			//holder.messagecount.setTextColor(Color.YELLOW);
+    			holder.messagecount.setVisibility(View.VISIBLE);
+    		} else {
+            	holder.messagecount.setText("");
+    			//holder.messagecount.setTextColor(Color.WHITE);
+    		}
         }
-        if (unreadc > 0) {
-        	holder.messagecount.setText("" + (unreadc - highlightc));
-			holder.messagecount.setTextColor(Color.YELLOW);
-		} else {
-        	holder.messagecount.setText("");
-			holder.messagecount.setTextColor(Color.WHITE);
-		}
-
         return convertView;
     }
 

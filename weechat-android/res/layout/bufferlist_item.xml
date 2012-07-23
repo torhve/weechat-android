@@ -35,15 +35,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="U:005"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:text="10"
+        android:textAppearance="?android:attr/textAppearanceSmall" 
+        android:textSize="16sp"
+   		android:textStyle="bold"
+        android:textColor="#000"
+        android:gravity="center_vertical"
+        android:background="@drawable/badge_circle"/>
+        />
      <TextView
         android:id="@+id/bufferlist_hotlist_highlightcount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:text="H:005"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:text="10"
+        android:textColor="#F00"
+        android:textSize="16sp"
+        android:textStyle="bold"
+		android:gravity="center_vertical"
+        android:background="@drawable/badge_circle"/>
+         />
 </RelativeLayout>
