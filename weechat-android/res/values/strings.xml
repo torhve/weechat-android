@@ -3,7 +3,7 @@
     <string name="app_name">weechat</string>
     <string name="sendButton">Send</string>
     <string name="app_version">Weechat v0.08-dev</string>
-    <string name="loading_please_wait">"Retrieving lines from buffer.\nPlease wait."</string>
+    <string name="loading_please_wait">""</string>
 
     <string name="menu_wee">WeeMenu</string>
     <string name="menu_connection_state">connection state</string>

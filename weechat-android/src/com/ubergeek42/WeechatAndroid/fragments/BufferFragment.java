@@ -51,7 +51,7 @@ public class BufferFragment extends SherlockFragment implements BufferObserver, 
 	private ChatLinesAdapter chatlineAdapter;
 	
 	private String[] nickCache;
-    private final String[] message = {""};	
+    //private final String[] message = {""};	
 
 	// Settings for keeping track of the current tab completion stuff
 	private boolean tabCompletingInProgress;
@@ -161,10 +161,12 @@ public class BufferFragment extends SherlockFragment implements BufferObserver, 
         inputBox   = (EditText) getView().findViewById(R.id.chatview_input);
         sendButton = (Button)   getView().findViewById(R.id.chatview_send);
         
-		chatlines.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.tips_list_item, message));
+		//chatlines.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.tips_list_item, message));
         chatlines.setEmptyView(getView().findViewById(android.R.id.empty));
 
 		buffer = rsb.getBufferByName(bufferName);
+		chatlineAdapter = new ChatLinesAdapter(getActivity(), buffer);
+		chatlines.setAdapter(chatlineAdapter);
 		
 		// TODO this could be settings defined by user
 		StringBuilder tsb = new StringBuilder();
@@ -184,8 +186,6 @@ public class BufferFragment extends SherlockFragment implements BufferObserver, 
 		// Subscribe to the buffer(gets the lines for it, and gets nicklist)
 		rsb.subscribeBuffer(buffer.getPointer());
 		
-		chatlineAdapter = new ChatLinesAdapter(getActivity(), buffer);
-		chatlines.setAdapter(chatlineAdapter);
 		onLineAdded();
 		
         sendButton.setOnClickListener(this);
