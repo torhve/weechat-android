@@ -193,8 +193,13 @@ public class BufferListFragment extends SherlockListFragment implements RelayCon
 						b = m_adapter.getItem(position);
 					}catch(ArrayIndexOutOfBoundsException e)
 					{
-						Log.d("BufferListFragment", "OutOfBounds:"+position);
+						Log.d("BufferListFragment", "AOutOfBounds:"+position);
+					}			
+					catch(IndexOutOfBoundsException e)
+					{
+						Log.d("BufferListFragment", "IOutOfBounds:"+position);
 					}
+
 				}
 				
 				buffers = bufferManager.getBuffers();
